@@ -27,7 +27,7 @@ function launchMainPage(data) {
   var negativecount = 0;
   for (var i in data) {
     if (i == "*") continue;
-    if (negatives.find(i) >= 0) {
+    if (negatives.indexOf(i) >= 0) {
       negativecount += data[i];
     }
     total += data[i];

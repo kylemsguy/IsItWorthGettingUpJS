@@ -6,7 +6,7 @@
 
 var UI = require('ui');
 var ajax = require('ajax');
-var Vector2 = require('vector2');
+//var Vector2 = require('vector2');
 
 var weFeelApiEndpoint = "http://wefeel.csiro.au/api/emotions/primary/totals";
 
@@ -14,16 +14,14 @@ var emotionData = ajax({
   url: weFeelApiEndpoint,
   type: 'json',
 },
-function(data) {
-  launchMainPage(data);
-},
+launchMainPage,
 function(error) {
   console.log(error);
   // ignore
 });
 
 
-function launchMainData(data) {
+function launchMainPage(data) {
   var negatives = ["sadness", "anger", "fear"];
   var total = 0;
   var negativecount = 0;

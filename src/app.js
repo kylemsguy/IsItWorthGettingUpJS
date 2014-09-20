@@ -24,16 +24,28 @@ function(error) {
 
 
 function launchMainData(data) {
+  var negatives = ["sadness", "anger", "fear"];
+  var total = 0;
+  var negativecount = 0;
+  for (var i in data) {
+    if (i == "*") continue;
+    if (negatives.find(i) >= 0) {
+      negativecount += data[i];
+    }
+    total += data[i];
+  }
+  var awfulThreshold = 0.5;
+  var awfulnessRatio = negativecount / total;
+  var tooawful = awfulnessRatio >= awfulThreshold;
+  var main = new UI.Card({
+    title: 'Pebble.js',
+    icon: 'images/menu_icon.png',
+    subtitle: tooawful? "Don't bother": "Fine, get up",
+    body: "There were " + negativecount + " negative tweets, and " + (total - negativecount) + " positive tweets.",
+  });
+  main.show();
 }
-var main = new UI.Card({
-  title: 'Pebble.js',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Hello World!',
-  body: 'Press any button.'
-});
-
-main.show();
-
+/*
 main.on('click', 'up', function(e) {
   var menu = new UI.Menu({
     sections: [{
@@ -74,3 +86,4 @@ main.on('click', 'down', function(e) {
   card.body('The simplest window type in Pebble.js.');
   card.show();
 });
+*/
